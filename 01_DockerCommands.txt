@@ -1,0 +1,42 @@
+  1  apt update
+    2  apt install docker.io -y
+    3  docker --version
+    4  docker version
+    5  systemctl status docker
+    6  docker run hello-world
+    7  dokcer images
+    8  docker image ls
+    9  docker container ls --all
+   10  docker --help
+   11  docker ps -a
+   12  docker container ls -a
+   13  docker container --help
+   14  docker container ls --help
+   15  docker pull ubuntu
+   16  docker images
+   17  docker image ls
+   18  docker pull ubuntu:18.04
+   19  docker images
+   20  docker pull centos
+   21  docker pull java
+   22  docker pull openjdk
+   23  docker images
+   24  docker pull centos:7
+   25  docker ubuntu
+   26  docker images ubuntu
+   27  docker images ubuntu:18.04
+   28  docker images --help
+   29  docker images --no-trunc
+   30  docker images -q
+   31  docker images
+   32  docker rmi ubuntu:18.04
+   33  docker images
+   34  docker images --digests
+   35  docker image inspect ubuntu
+   36  docker image inspect centos
+   37  docker images --filter "label=org.label-schema.build-date"
+   38  docker images --filter "label=org.label-schema.build-date=20210915"
+   39  docker images --filter "before=ubuntu"
+   40  docker images --format "{{.ID}}: {{.Repository}}"
+   41  docker images --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
+   42  history
