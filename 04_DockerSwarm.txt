@@ -1,0 +1,55 @@
+  1  docker network ls
+    2  docker swarm init
+    3  docker network ls
+    4  docker service create  --name=viz --publish=8080:8080/tcp  --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock dockersamples/visualizer
+    5  docker service --help
+    6  docker service create --name webservice --replicas 1 -d nginx
+    7  docker service ls
+    8  docker service ps webservice
+    9  docker service scale webservice=3
+   10  docker service scale webservice=1
+   11  docker service rm webservice
+   12  docker service create --name webservice --public 80:80 -d nginx
+   13  docker service create --name webservice --publish 80:80 -d nginx
+   14  docker service rm webservice
+   15  docker service create --name webservice --constraint "node.role==manager" -d nginx
+   16  docker service scale webservice=3
+   17  docker service rm webservice
+   18  docker service create --name webservice --constraint "node.role==worker" -d nginx
+   19  docker service scale webservice=3
+   20  docker service rm webservice
+   21  docker node update --label-add="env=prod" worker01
+   22  docker service create --name webservice -d --constraint="node.labels.env==prod" --publish 80:80 nginx
+   23  docker service scale webservice=3
+   24  docker service create --name redis --replicas 5 --update-delay 10s redis:3.0.6
+   25  docker service ls
+   26  docker service rm webservice redis
+   27  docker service create --name redis --replicas 5 --update-delay 10s redis:3.0.6
+   28  docker service update redis --image redis:3.0.7
+   29  docker service update redis --image redis:21
+   30  docker service rollback redis
+   31  ls
+   32  mv docker-compose.yml stack.yml
+   33  docker stack --help
+   34  docker stack deploy -c stack.yml mystack
+   35  docker stack ls
+   36  docker stack services mystack
+   37  docker network ls
+   38  docker stack rm mystack
+   39  docker network ls
+   40  ls /var/lib/docker/
+   41  cd /var/lib/docker/
+   42  tar -zcvf swarm.tar.gz swarm/
+   43  docker node ls
+   44  rm -ifr swarm
+   45  ls
+   46  systemctl restart docker
+   47  docker node ls
+   48  ls
+   49  systemctl stop docker
+   50  rm -fr swarm
+   51  ls
+   52  tar -xvzf swarm.tar.gz
+   53  ls
+   54  systemctl start docker
+   55  docker node ls
