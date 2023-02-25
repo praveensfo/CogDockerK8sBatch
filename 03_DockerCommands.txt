@@ -1,0 +1,135 @@
+ 1  apt update
+    2  apt install docker.io -y
+    3  ls /var/lib/docker/
+    4  ls /var/lib/docker/overlay2
+    5  docker pull ubuntu
+    6  docker images
+    7  ls /var/lib/docker/overlay2
+    8  ls /var/lib/docker/overlay2/42c5417fe9caa007dd7bec80cef44d1ec8864432d72587d0749612b7ea5c3d13/
+    9  ls /var/lib/docker/overlay2/42c5417fe9caa007dd7bec80cef44d1ec8864432d72587d0749612b7ea5c3d13/diff/
+   10  docker container run -it --name c1 -d ubuntu
+   11  ls /var/lib/docker/overlay2
+   12  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080
+   13  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080/diff/
+   14  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080/merged/
+   15  docker exec -it c1 bash
+   16  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080/merged/
+   17  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080/diff/
+   18  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080-init/
+   19  ls /var/lib/docker/overlay2/5dd820be7f90bbb2b51e99776803c8c569bdab7d368a4462e9b7be204f146080-init/diff/
+   20  ls /var/lib/docker
+   21  docker ps -a
+   22  docker exec -it c1 bash
+   23  docker stop c1
+   24  docker start c1
+   25  docker exec -it c1 bash
+   26  docker rm -f c1
+   27  docker container run -it --name c1 --mount type=tmpfs,destination=/test -d ubuntu
+   28  docker exec -it c1 bash
+   29  docker stop c1
+   30  docker start c1
+   31  docker exec -it c1 bash
+   32  docker rm -f c1
+   33  ls /var/lib/docker/
+   34  ls /var/lib/docker/volumes/
+   35  docker volume --help
+   36  docker volume ls
+   37  docker volume create demo-vol
+   38  docker volume ls
+   39  ls /var/lib/docker/volumes/
+   40  ls /var/lib/docker/volumes/demo-vol/_data/
+   41  docker container run -it --name c1 --mount source=demo-vol,destination=/test -d centos
+   42  docker ps
+   43  docker exec -it c1 bash
+   44  ls /var/lib/docker/volumes/demo-vol/_data/
+   45  docker inspect c1
+   46  docker rm -f c1
+   47  ls /var/lib/docker/volumes/demo-vol/_data/
+   48  docker container run -it --name c1 --mount source=demo-vol,destination=/demo -d ubuntu
+   49  docker exec -it c1 bash
+   50  ls /var/lib/docker/volumes/demo-vol/_data/
+   51  docker rm -f c1
+   52  docker volume rm demo-vol
+   53  docker volume ls
+   54  ls /var/lib/docker/volumes/demo-vol/_data/
+   55  mkdir mydir
+   56  cd mydir/
+   57  ls
+   58  docker container run -it --name c1 -v /home/ubuntu/mydir:/demo -d centos
+   59  docker inspect c1
+   60  docker exec -it c1 bash
+   61  ls
+   62  docker rm -f c1
+   63  ls
+   64  docker container run -it --name c1 -v /home/ubuntu/mydir:/demo1 -d ubuntu
+   65  docker exec -it c1 bash
+   66  docker rm -f c1
+   67  docker ps
+   68  docker ps -a
+   69  cd ..
+   70  rm -ifr mydir/
+   71  ls
+   72  ip a
+   73  docker network ls
+   74  docker container run -it --name c1 -d centos
+   75  docker inspect c1
+   76  docker container run -it --name c2 -d centos
+   77  docker inspect c2
+   78  docker exec -it c1 bash
+   79  docker rm -f c1 c3
+   80  docker rm -f c2
+   81  docker network ls
+   82  docker network --help
+   83  docker network create -d bridge br1 --subnet 192.168.0.0/16 --gateway 192.168.0.1
+   84  docker network ls
+   85  docker container run -it --name c1 --network br1 -d centos
+   86  docker inspect c1
+   87  docker container run -it --name c2 --network br1 -d centos
+   88  docker inspect c2
+   89  docker exec -it c3 bash
+   90  docker exec -it c2 bash
+   91  docker network ls
+   92  docker rm -f c1 c2
+   93  docker network rm br1
+   94  docker network ls
+   95  docker container run -it --name web -d nginx
+   96  docker ps
+   97  docker inspect web
+   98  docker rm -f web
+   99  docker container run -it --name web --network host -d nginx
+  100  docker inspect web
+  101  curl localhost
+  102  docker rm -f web
+  103  docker network ls
+  104  docker container run -it --name c1 --network none -d cetnos
+  105  docker container run -it --name c1 --network none -d centos
+  106  docker inspect c1
+  107  docker exec -it c1 bash
+  108  docker network disconnect c1 none
+  109  docker network disconnect none c1
+  110  docker network connect bridge c1
+  111  docker inspect c1
+  112  history
+  113  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  114  chmod +x /usr/local/bin/docker-compose
+  115  vi docker-compose.yml
+  116  docker ps
+  117  docker rm -f c1
+  118  docker-compose up -d
+  119  docker network ls
+  120  docker ps
+  121  docker inspect f7498918e05f
+  122  docker-compose scale db=3
+  123  docker ps
+  124  docker-compose scale db=1
+  125  docker ps -a
+  126  docker volume ls
+  127  ls /var/lib/docker/volumes/ubuntu_db_data/_data/
+  128  docker-compose down
+  129  docker ps -a
+  130  docker network ls
+  131  ls /var/lib/docker/volumes/ubuntu_db_data/_data/
+  132  docker ps -a
+  133  docker volume prune
+  134  docker network ls
+  135  docker ps -a

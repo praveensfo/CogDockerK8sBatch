@@ -1,0 +1,173 @@
+ 43  hostname docker01
+   44  echo docker01 > /etc/hostname
+   45  history
+   46  bash
+   47  whoami
+   48  docker --help
+   49  docker container --help
+   50  docker images
+   51  docker container ls --all
+   52  docker container rm 148f222238fe
+   53  docker container run -it ubuntu
+   54  docker container ls -a
+   55  docker container run -it -d ubuntu
+   56  docker container ls -a
+   57  docker container rename 327845b50b1d detachcontainer
+   58  docker container ls -a
+   59  docker container run -it --name c1 centos
+   60  docker container run -it --name c1 -d centos
+   61  docker container run -it --name c2 -d centos
+   62  docker container ls -a
+   63  docker ps
+   64  docker ps -a
+   65  docker container ls
+   66  docker container ls -a
+   67  docker container ls --all
+   68  docker ps
+   69  docker stop c2
+   70  docker ps -a
+   71  docker start c2
+   72  docker start c1
+   73  docker container ls -a
+   74  docker restart d29fe3ba4e00
+   75  docker container ls -a
+   76  docker restart detachcontainer
+   77  docker container ls -a
+   78  docker pause c2
+   79  docker ps -a
+   80  docker unpause c2
+   81  docker ps -a
+   82  docker events --since '2023-02-18'
+   83  docker ps -a
+   84  docker kill c2
+   85  docker ps -a
+   86  docker exec -it c1 bash
+   87  docker ps -a
+   88  docker rm c2
+   89  docker ps -a
+   90  docker rm c1
+   91  docker rm -f c1
+   92  docker ps -a
+   93  docker run -d ubuntu
+   94  docker ps -a
+   95  docker rm -f $(docker ps -a -q)
+   96  docker ps -a
+   97  docker images
+   98  docker rmi -f $(docker images -q)
+   99  docker images
+  100  echo "<h1>This is supercool html file </h1>" > test.html
+  101  cat test.html
+  102  docker container run -it --name web -p 80:80 -d ubuntu
+  103  docker ps
+  104  docker exec -it web bash
+  105  ls
+  106  docker cp test.html web:/var/www/html
+  107  docker stats web
+  108  docker container run -it --name c1 -m 16M -d nginx
+  109  docker stats c1
+  110  docker inspect c1
+  111  docker inspect c1 | grep Memory
+  112  docker container run -it --name c2 -c 610 -d nginx
+  113  docker inspect c1 | grep Cpu
+  114  docker inspect c2 | grep Cpu
+  115  docker ps
+  116  docker commit web webimg
+  117  docekr image rm webimg
+  118  docker image rm webimg
+  119  docker ps
+  120  docker commit web webimg
+  121  docker images
+  122  docker rm f web
+  123  docker rm -f web
+  124  docker ps
+  125  docker rm -f c1 c2
+  126  docker ps
+  127  docker images
+  128  docker container run -it --name web1 -p 84:80 -d webimg
+  129  docker exec -t web1 -- bash
+  130  docker exec -t web1  bash
+  131  service status apache2
+  132  service apache2 start
+  133  docker exec -it web1  bash
+  134  docker ps
+  135  docker images
+  136  docker login
+  137  docker logout
+  138  docker login
+  139  docker image tag webimg ramansharma95/webimg
+  140  docker images
+  141  docker push ramansharma95/webimg
+  142  docker ps
+  143  docker image tag webimg localhost:5000/myimg
+  144  docker images
+  145  docker push localhost:5000/myimg
+  146  docker ps
+  147  docker inspect local_registry
+  148  ls /var/lib/docker/volumes/d6596ce4c8b34d483dadefe621539199ed4910b77aad660e048945332e581223/_data
+  149  ls /var/lib/docker/volumes/d6596ce4c8b34d483dadefe621539199ed4910b77aad660e048945332e581223/_data/docker/registry/v2/repositories/
+  150  docker images
+  151  docker rm -f $(docker ps -a -q)
+  152  docker ps -a
+  153  docker rmi -f webimg ramansharma95/webimg localhost:5000/myimg
+  154  docker images
+  155  docker pull localhost:5000/myimg
+  156  docker image tag ubuntu localhost:5000/myubuntu
+  157  docker push localhost:5000/myubuntu
+  158  docker images
+  159  docker rmi ubuntu
+  160  docker rmi localhost:5000/myubuntu
+  161  docker images
+  162  docker pull localhost:5000/myubuntu
+  163  docker images
+  164  docker rmi 58db3edaf2be
+  165  docker images
+  166  docker pull ubuntu
+  167  docker image tag ubuntu localhost:5000/myubuntu
+  168  docker images
+  169  docker rmi -f 58db3edaf2be
+  170  docker images
+  171  vi Dockerfile
+  172  docker build . -t webimg1
+  173  docker images
+  174  docker ps
+  175  docker rm -f local_registry
+  176  docker ps
+  177  docker container run  -it --name web -p 80:80 -d webimg1
+  178  docker exec -it web bash
+  179  vi Dockerfile
+  180  docker build . -t img1
+  181  docker images
+  182  docker container run -it --name c1 -d img1
+  183  docker exec -it c1 bash
+  184  touch myfiles myfile2
+  185  wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/source/apache-maven-3.6.3-src.tar.gz
+  186  ls
+  187  vi Dockerfile
+  188  docker build . -t img2
+  189  docker container run -it --name c2 -d img2
+  190  docker exec -it c2 bash
+  191  vi Dockerfile
+  192  docker build . -t img3
+  193  docker images
+  194  docker run img3
+  195  docker images
+  196  docker ps -a
+  197  docker run img3 echo "Hello DevOps"
+  198  vi Dockerfile
+  199  docker build . -t img4
+  200  docker run img4
+  201  docker run img4 echo "Hello DevOps"
+  202  rm *
+  203  ls
+  204  git clone https://github.com/onlineTrainingguy/jenkinscicd.git
+  205  ls
+  206  cd jenkinscicd/
+  207  ls
+  208  vi Dockerfile
+  209  docker build . -t img4
+  210  docker images
+  211  docker run img4
+  212  vi Dockerfile
+  213  docker build . -t img5
+  214  docker images
+  215  docker run img5
