@@ -1,0 +1,56 @@
+ 1  apt update && apt install docker.io -y
+    2  docker --version
+    3  sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+    4  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    5  sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+    6  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    7  sudo apt-get install -y apt-transport-https ca-certificates curl
+    8  sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    9  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+   10  ls
+   11  wget https://packages.cloud.google.com/apt/doc/apt-key.gpg
+   12  ls
+   13  curl -s apt-key.gpg | sudo apt-key add
+   14  cat apt-key.gpg | sudo apt-key add
+   15  ls
+   16  chmod 777 apt-key.gpg
+   17  cat apt-key.gpg | sudo apt-key addcat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+
+EOF
+
+   18  cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+
+EOF
+
+   19  apt update
+   20  apt install -qq -y kubeadm=1.24.04-00 kubelet=1.24.04-00 kubectl=1.24.04-00
+   21  apt install -qq -y kubeadm=1.24.0-04 kubelet=1.24.0-04 kubectl=1.24.0-04
+   22  apt install -qq -y kubeadm=1.24.00-00 kubelet=1.24.00-00 kubectl=1.24.00-00
+   23  apt install -qq -y kubeadm=1.21.00-00 kubelet=1.21.00-00 kubectl=1.21.00-00
+   24  apt install -qq -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
+   25  sudo apt-mark hold kubelet kubeadm kubectl
+   26  mkdir -p $HOME/.kube
+   27  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   28  kubectl get nodes
+   29  kubectl create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
+   30  kubectl get nodes
+   31  kubectl get pods
+   32  kubectl get pods -n kube-system
+   33  export RELEASE="3.3.13"
+   34  ls
+   35  cd etcd-v${RELEASE}-linux-amd64
+   36  ls
+   37  kubectl get pods -n kube-system
+   38  kubectl describe pods etcd-kmaster -n kube-system
+   39  ETCDCTL_API=3 etcdctl --endpoints=https://172.31.52.90:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt get / --prefix --keys-only
+   40  ETCDCTL_API=3 etcdctl --endpoints=https://172.31.52.90:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt put name raman
+   41  ETCDCTL_API=3 etcdctl --endpoints=https://172.31.52.90:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt get name
+   42  ls /etc/kubernetes/pki
+   43  ETCDCTL_API=3 etcdctl snapshot save snapshot.db  --cacert=/etc/kubernetes/pki/etcd/ca.crt --key=/etc/kubernetes/pki/etcd/server.key --cert=/etc/kubernetes/pki/etcd/server.crt
+   44  ls
+   45  ETCDCTL_API=3 etcdctl --write-out=table snapshot status snapshot.db
+   46  history
